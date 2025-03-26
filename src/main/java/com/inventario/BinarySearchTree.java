@@ -1,6 +1,6 @@
 package main.java.com.inventario;
 
-class BinarySearchTree {
+public class BinarySearchTree {
     private Node root;
 
     //Metodo para agregar un producto.

@@ -1,111 +1,117 @@
 package test.java.com.inventario;
 
+import main.java.com.inventario.BinarySearchTree;
+import main.java.com.inventario.Node;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BinarySearchTreeTest {
-    private BinarySearchTreeTest tree;
+    private BinarySearchTree tree;
 
+    @Before
+    public void setUp() {
+        tree = new BinarySearchTree();
+    }
     
     @Test
     public void testAddAndSearchSingleProduct() {
-        // Add a product
+        // Agregar un producto
         tree.add("SKU001", "Laptop", "Electrónica", 1000.0, 850.0);
         
-        // Search for the adPoded product
+        // Buscar el producto agregado
         Node result = tree.Buscar("SKU001");
         
-        // Verify the product details
-        assertNotNull("Product should be found", result);
-        assertEquals("SKU should match", "SKU001", result.Sku);
-        assertEquals("Product name should match", "Laptop", result.Nombre_producto);
-        assertEquals("Category should match", "Electrónica", result.Categoria);
-        assertEquals("Retail price should match", 1000.0, result.Precio_r, 0.001);
-        assertEquals("Current price should match", 850.0, result.Precio_c, 0.001);
+        // Verificar los detalles del producto
+        assertNotNull("Producto debe ser encontrado", result);
+        assertEquals("SKU debe coincidir", "SKU001", result.Sku);
+        assertEquals("Nombre del producto debe coincidir", "Laptop", result.Nombre_producto);
+        assertEquals("Categoría debe coincidir", "Electrónica", result.Categoria);
+        assertEquals("Precio retail debe coincidir", 1000.0, result.Precio_r, 0.001);
+        assertEquals("Precio actual debe coincidir", 850.0, result.Precio_c, 0.001);
     }
 
     @Test
     public void testAddMultipleProductsAndSearch() {
-        // Add multiple products
+        // Agregar múltiples productos
         tree.add("SKU001", "Laptop", "Electrónica", 1000.0, 850.0);
         tree.add("SKU002", "Smartphone", "Electrónica", 800.0, 700.0);
         tree.add("SKU003", "Tablet", "Electrónica", 500.0, 450.0);
 
-        // Search for different products
+        // Buscar diferentes productos
         Node laptop = tree.Buscar("SKU001");
         Node smartphone = tree.Buscar("SKU002");
         Node tablet = tree.Buscar("SKU003");
 
-        // Verify each product
-        assertNotNull("Laptop should be found", laptop);
-        assertNotNull("Smartphone should be found", smartphone);
-        assertNotNull("Tablet should be found", tablet);
+        // Verificar cada producto
+        assertNotNull("Laptop debe ser encontrado", laptop);
+        assertNotNull("Smartphone debe ser encontrado", smartphone);
+        assertNotNull("Tablet debe ser encontrado", tablet);
 
-        assertEquals("Laptop SKU should match", "SKU001", laptop.Sku);
-        assertEquals("Smartphone SKU should match", "SKU002", smartphone.Sku);
-        assertEquals("Tablet SKU should match", "SKU003", tablet.Sku);
+        assertEquals("SKU de Laptop debe coincidir", "SKU001", laptop.Sku);
+        assertEquals("SKU de Smartphone debe coincidir", "SKU002", smartphone.Sku);
+        assertEquals("SKU de Tablet debe coincidir", "SKU003", tablet.Sku);
     }
 
     @Test
     public void testSearchNonExistentProduct() {
-        // Add a product
+        // Agregar un producto
         tree.add("SKU001", "Laptop", "Electrónica", 1000.0, 850.0);
 
-        // Search for a non-existent product
+        // Buscar un producto inexistente
         Node result = tree.Buscar("SKU999");
 
-        // Verify that no product is found
-        assertNull("Non-existent product should return null", result);
+        // Verificar que no se encuentre ningún producto
+        assertNull("Producto inexistente debe retornar null", result);
     }
 
     @Test
     public void testAddProductsInOrder() {
-        // Add products in ascending order
-        tree.add("SKU001", "Product A", "Category A", 100.0, 90.0);
-        tree.add("SKU002", "Product B", "Category B", 200.0, 180.0);
-        tree.add("SKU003", "Product C", "Category C", 300.0, 270.0);
+        // Agregar productos en orden ascendente
+        tree.add("SKU001", "Producto A", "Categoría A", 100.0, 90.0);
+        tree.add("SKU002", "Producto B", "Categoría B", 200.0, 180.0);
+        tree.add("SKU003", "Producto C", "Categoría C", 300.0, 270.0);
 
-        // Verify each product can be found
-        Node productA = tree.Buscar("SKU001");
-        Node productB = tree.Buscar("SKU002");
-        Node productC = tree.Buscar("SKU003");
+        // Verificar que cada producto se pueda encontrar
+        Node productoA = tree.Buscar("SKU001");
+        Node productoB = tree.Buscar("SKU002");
+        Node productoC = tree.Buscar("SKU003");
 
-        assertNotNull("Product A should be found", productA);
-        assertNotNull("Product B should be found", productB);
-        assertNotNull("Product C should be found", productC);
+        assertNotNull("Producto A debe ser encontrado", productoA);
+        assertNotNull("Producto B debe ser encontrado", productoB);
+        assertNotNull("Producto C debe ser encontrado", productoC);
     }
 
     @Test
     public void testAddProductsInReverseOrder() {
-        // Add products in descending order
-        tree.add("SKU003", "Product C", "Category C", 300.0, 270.0);
-        tree.add("SKU002", "Product B", "Category B", 200.0, 180.0);
-        tree.add("SKU001", "Product A", "Category A", 100.0, 90.0);
+        // Agregar productos en orden descendente
+        tree.add("SKU003", "Producto C", "Categoría C", 300.0, 270.0);
+        tree.add("SKU002", "Producto B", "Categoría B", 200.0, 180.0);
+        tree.add("SKU001", "Producto A", "Categoría A", 100.0, 90.0);
 
-        // Verify each product can be found
-        Node productA = tree.Buscar("SKU001");
-        Node productB = tree.Buscar("SKU002");
-        Node productC = tree.Buscar("SKU003");
+        // Verificar que cada producto se pueda encontrar
+        Node productoA = tree.Buscar("SKU001");
+        Node productoB = tree.Buscar("SKU002");
+        Node productoC = tree.Buscar("SKU003");
 
-        assertNotNull("Product A should be found", productA);
-        assertNotNull("Product B should be found", productB);
-        assertNotNull("Product C should be found", productC);
+        assertNotNull("Producto A debe ser encontrado", productoA);
+        assertNotNull("Producto B debe ser encontrado", productoB);
+        assertNotNull("Producto C debe ser encontrado", productoC);
     }
 
     @Test
     public void testAddDuplicateSKU() {
-        // First addition
-        tree.add("SKU001", "Original Product", "Category A", 100.0, 90.0);
+        // Primera adición
+        tree.add("SKU001", "Producto Original", "Categoría A", 100.0, 90.0);
         
-        // Second addition with same SKU
-        tree.add("SKU001", "Duplicate Product", "Category B", 200.0, 180.0);
+        // Segunda adición con el mismo SKU
+        tree.add("SKU001", "Producto Duplicado", "Categoría B", 200.0, 180.0);
 
-        // Verify that the first added product remains
+        // Verificar que el primer producto agregado permanezca
         Node result = tree.Buscar("SKU001");
         
-        assertNotNull("Product should be found", result);
-        assertEquals("Original product details should remain", "Original Product", result.Nombre_producto);
-        assertEquals("Original category should remain", "Category A", result.Categoria);
+        assertNotNull("Producto debe ser encontrado", result);
+        assertEquals("Los detalles del producto original deben permanecer", "Producto Original", result.Nombre_producto);
+        assertEquals("La categoría original debe permanecer", "Categoría A", result.Categoria);
     }
 }

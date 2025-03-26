@@ -2,11 +2,11 @@ package main.java.com.inventario;
 
 public class Node {
     //Atributos
-    String Sku;
-    String Nombre_producto;
-    String Categoria;
-    double Precio_r;
-    double Precio_c;
+    public String Sku;
+    public String Nombre_producto;
+    public String Categoria;
+    public double Precio_r;
+    public double Precio_c;
     Node left, right;
     
     //Constructor
